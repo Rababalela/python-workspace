@@ -1,1 +1,2 @@
-# python-workspace
+# HEX SOFTWARE internship
+# PYTHON PROGRAMMING
