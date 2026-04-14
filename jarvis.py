@@ -1,0 +1,225 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Rababalela/python-workspace/blob/main/jarvis.py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "59237ee9"
+      },
+      "source": [
+        "import os\n",
+        "if not os.path.exists('/usr/include/portaudio.h'):\n",
+        "  print('Installing portaudio19-dev...')\n",
+        "  !sudo apt-get update && sudo apt-get install -y portaudio19-dev\n",
+        "  print('portaudio19-dev installed.')\n",
+        "else:\n",
+        "  print('portaudio19-dev already installed.')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "import os\n",
+        "# Install system dependencies for PyAudio\n",
+        "!sudo apt-get update\n",
+        "!sudo apt-get install -y portaudio19-dev\n",
+        "\n",
+        "# Now install Python packages\n",
+        "!pip install pyttsx3\n",
+        "!pip install SpeechRecognition\n",
+        "!pip install PyAudio\n",
+        "\n",
+        "import datetime\n",
+        "import webbrowser\n",
+        "\n",
+        "import math\n",
+        "import random\n",
+        "import pyttsx3\n",
+        "import speech_recognition as sr\n",
+        "import operator\n",
+        "\n",
+        "# ______________________________________________________________________________\n",
+        "# JARVIS - voice assistant\n",
+        "# Author: Tumelo\n",
+        "# ______________________________________________________________________________\n",
+        "\n",
+        "ASSISTANT_NAME = \"JARVIS\"\n",
+        "reminders = []\n",
+        "\n",
+        "# _______Engine Setup___________________________________________________________\n",
+        "try:\n",
+        "  engine = pyttsx3.init('espeak')\n",
+        "  engine.setProperty(\"rate\", 170)\n",
+        "  engine.setProperty(\"volume\", 1.0)\n",
+        "  voices = engine.getProperty('voices')\n",
+        "  if voices:\n",
+        "    target_voice_id = next((v.id for v in voices if 'en' in v.id.lower()), voices[0].id)\n",
+        "    engine.setProperty('voice', target_voice_id)\n",
+        "except Exception as e:\n",
+        "  print(f\"TTS Engine failed: {e}\")\n",
+        "  class DummyEngine:\n",
+        "    def say(self, text): print(f\"JARVIS (Text): {text}\")\n",
+        "    def runAndWait(self): pass\n",
+        "    def setProperty(self, k, v): pass\n",
+        "    def getProperty(self, k): return []\n",
+        "  engine = DummyEngine()\n",
+        "\n",
+        "def speak(text):\n",
+        "  print(f\"{ASSISTANT_NAME}: {text}\")\n",
+        "  engine.say(text)\n",
+        "  engine.runAndWait()\n",
+        "\n",
+        "def listen():\n",
+        "  r = sr.Recognizer()\n",
+        "  try:\n",
+        "    with sr.Microphone() as source:\n",
+        "      print(\"Listening...\")\n",
+        "      r.pause_threshold = 1\n",
+        "      audio = r.listen(source, timeout=5, phrase_time_limit=5)\n",
+        "      user_input = r.recognize_google(audio, language=\"en-US\").lower()\n",
+        "      print(f\"You: {user_input}\")\n",
+        "      return user_input\n",
+        "  except Exception as e:\n",
+        "    print(f\"Listening error: {e}\")\n",
+        "    return \"\"\n",
+        "\n",
+        "def tell_time():\n",
+        "  now = datetime.datetime.now().strftime(\"%H:%M:%S\")\n",
+        "  speak(f\"The current time is {now}\")\n",
+        "\n",
+        "def calculate(expression):\n",
+        "  allowed = {\"sqrt\": math.sqrt, \"sin\": math.sin, \"cos\": math.cos, \"tan\": math.tan, \"pi\": math.pi, \"**\": operator.pow, \"*\": operator.mul, \"+\": operator.add, \"-\": operator.sub}\n",
+        "  try:\n",
+        "    result = eval(expression, {\"__builtins__\":{}}, allowed)\n",
+        "    speak(f\"The result is {result}\")\n",
+        "  except Exception as e: speak(f\"Math error: {e}\")\n",
+        "\n",
+        "def process_command(command):\n",
+        "  if not command: return True\n",
+        "  if any(w in command for w in [\"hello\", \"hi\"]): speak(f\"Hello! I am {ASSISTANT_NAME}.\")\n",
+        "  elif \"time\" in command: tell_time()\n",
+        "  elif \"math\" in command or \"calculate\" in command:\n",
+        "    speak(\"What is the expression?\")\n",
+        "    calculate(listen())\n",
+        "  elif \"search\" in command:\n",
+        "    speak(\"What should I search?\")\n",
+        "    query = listen()\n",
+        "    if query: webbrowser.open(f\"https://www.google.com/search?q={query}\")\n",
+        "  elif any(w in command for w in [\"bye\", \"quit\", \"exit\"]):\n",
+        "    speak(\"Goodbye!\")\n",
+        "    return False\n",
+        "  return True\n",
+        "\n",
+        "def main():\n",
+        "  speak(f\"JARVIS system online.\")\n",
+        "  running = True\n",
+        "  while running:\n",
+        "    cmd = listen()\n",
+        "    running = process_command(cmd)\n",
+        "\n",
+        "if __name__ == \"__main__\":\n",
+        "  main()"
+      ],
+      "metadata": {
+        "id": "74ydkEfpaZVq"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# New Section"
+      ],
+      "metadata": {
+        "id": "C3zdUa_ZGYeY"
+      }
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9626fecd"
+      },
+      "source": [
+        "import os\n",
+        "# Install system dependencies for PyAudio\n",
+        "!sudo apt-get update\n",
+        "!sudo apt-get install -y portaudio19-dev\n",
+        "\n",
+        "# Now install Python packages\n",
+        "!pip install pyttsx3\n",
+        "!pip install SpeechRecognition\n",
+        "!pip install PyAudio"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "b74da0c5"
+      },
+      "source": [
+        "try:\n",
+        "    import pyaudio\n",
+        "    print(\"PyAudio is correctly installed.\")\n",
+        "except ImportError:\n",
+        "    print(\"PyAudio is not installed or not accessible.\")\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from google.colab import output\n",
+        "output.enable_custom_widget_manager()"
+      ],
+      "metadata": {
+        "id": "kpMpXR1chcjv"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from google.colab import output\n",
+        "output.disable_custom_widget_manager()"
+      ],
+      "metadata": {
+        "id": "MEXM2Xxvhcj7"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOQcr4hvu1yWOLNattzT3cY",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
