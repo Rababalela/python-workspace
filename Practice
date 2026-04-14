@@ -1,0 +1,593 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNxzuVtQ34iwBCc1aEarxJU",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Rababalela/python-workspace/blob/main/Practice\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "kL460nZRzg_W"
+      },
+      "outputs": [],
+      "source": [
+        "case_rule = \"lower\"\n",
+        "\n",
+        "def cleaned_text(name):\n",
+        "  clean = name.strip()\n",
+        "  if case_rule == \"lower\":\n",
+        "    clean = clean.lower()\n",
+        "  print(f\"i love you,{clean}\")\n",
+        "\n",
+        "cleaned_text(input())\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def main ():\n",
+        "attempts = 7\n",
+        "secret_number = generate_number ()\n",
+        "while attempts > 0:\n",
+        "   guess = int (input (\"Guess the number (1-50):\"))\n",
+        "\n",
+        "   guesses = evaluate_guess (secret_number, guess)\n",
+        "   if guesses == \"Correct\":\n",
+        "\n",
+        "    print (\"guess is correct!\")\n",
+        "    break\n",
+        "   elif guesses == \"Too High\":\n",
+        "        attempts_ -= 1\n",
+        "\n",
+        "\n",
+        "        print (f\" Too High, (attempts) attempts remaining\")\n",
+        "\n",
+        "   else:\n",
+        "        attempts_-= 1\n",
+        "        print (f\"Too Low, {attempts) attempts remaining\")\n",
+        "\n",
+        "   if attempts == 0:\n",
+        "\n",
+        "       print (\"Out of attempts, gameover!\")"
+      ],
+      "metadata": {
+        "id": "y7qABBCWailh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "name = float(input(\"enter name\"))\n",
+        "print(f\"hello I'm (name)\") # wrong way\n",
+        "print(f\"hello I'm {name}\") # correct way"
+      ],
+      "metadata": {
+        "id": "42vLcerxeiBf"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "while attempts > 0:\n",
+        "    guess = int(input(\"Guess the number (1-50):\"))\n",
+        "    guesses = evaluate_guess(secret_number, guess)\n",
+        "    if guesses == \"Correct\":\n",
+        "        print(\"guess is correct!\")\n",
+        "        break\n",
+        "    elif guesses == \"Too High\":\n",
+        "        attempts -= 1\n",
+        "        print(f\"Too High, {attempts} attempts remaining\")\n",
+        "    else:\n",
+        "        attempts -= 1\n",
+        "        print(f\"Too Low, {attempts} attempts remaining\")\n",
+        "\n",
+        "    if attempts == 0:              # ← same indent as 'if guesses'\n",
+        "        print(\"Out of attempts, gameover!\")\n",
+        "        print(f\"The correct number was: {secret_number}\")\n",
+        "        break                      # ← add"
+      ],
+      "metadata": {
+        "id": "6eAloxhYhdcv"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "number = int(input(\"enter a postive number: \"))\n",
+        "while number <= 0:\n",
+        "  print(\"Invaild, Please enter a postive number\")\n",
+        "  number = int(input(\"enter a postive number: \"))\n",
+        "\n",
+        "print(\"\\nEven numbers from 1 to\", number, \":\")\n",
+        "even_sum = 0\n",
+        "\n",
+        "for i in range(1, number + 1):\n",
+        "  if i % 2 == 0:\n",
+        "    print(i)\n",
+        "    even_sum += i\n",
+        "\n",
+        "print(\"\\nSum of even numbers:\", even_sum)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "collapsed": true,
+        "id": "GX5DNDswOpol",
+        "outputId": "97248e9a-a569-4459-f886-cb2b19f551f9"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "enter a postive number: -8\n",
+            "Invaild, Please enter a postive number\n",
+            "enter a postive number: 8\n",
+            "\n",
+            "Even numbers from 1 to 8 :\n",
+            "2\n",
+            "4\n",
+            "6\n",
+            "8\n",
+            "\n",
+            "Sum of even numbers: 20\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "num = int(input(\"Enter a positive value:  \"))\n",
+        "while num <= 0:\n",
+        "    print(\"Invalid, Enter a number greater then zero: \")\n",
+        "    num = int(input(\"Enter a positive value: \"))\n",
+        "\n",
+        "print(f\"\\nOdd numbers between 1 and {num}:\")\n",
+        "\n",
+        "odd_sum = 0\n",
+        "for i in range (1, num + 1 ):\n",
+        "    if i % 2 != 0:\n",
+        "        print(i)\n",
+        "        odd_sum += i\n",
+        "print(f\"\\nsum of odd numbers: {odd_sum}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "WljE11-bSH_K",
+        "outputId": "4b2f0ae6-1d41-46d9-c817-8d4ec3b06540"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter a positive value:  87\n",
+            "\n",
+            "Odd numbers between 1 and 87:\n",
+            "1\n",
+            "3\n",
+            "5\n",
+            "7\n",
+            "9\n",
+            "11\n",
+            "13\n",
+            "15\n",
+            "17\n",
+            "19\n",
+            "21\n",
+            "23\n",
+            "25\n",
+            "27\n",
+            "29\n",
+            "31\n",
+            "33\n",
+            "35\n",
+            "37\n",
+            "39\n",
+            "41\n",
+            "43\n",
+            "45\n",
+            "47\n",
+            "49\n",
+            "51\n",
+            "53\n",
+            "55\n",
+            "57\n",
+            "59\n",
+            "61\n",
+            "63\n",
+            "65\n",
+            "67\n",
+            "69\n",
+            "71\n",
+            "73\n",
+            "75\n",
+            "77\n",
+            "79\n",
+            "81\n",
+            "83\n",
+            "85\n",
+            "87\n",
+            "\n",
+            "sum of odd numbers: 1936\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calculate_average(test, assignment, exam):\n",
+        "  final_mark = (test * 0.3) + (assignment * 0.2) + (exam * 0.5)\n",
+        "  return final_mark\n",
+        "\n",
+        "def determine_result(final_mark):\n",
+        "  if final_mark >= 50:\n",
+        "    return \"Pass\"\n",
+        "  else:\n",
+        "     return \"Fail\"\n",
+        "\n",
+        "# main program\n",
+        "test = float(input(\"Enter test mark:  \"))\n",
+        "assignment = float(input(\"Enter assignment mark:  \"))\n",
+        "exam = float(input(\"Enter exam mark:  \"))\n",
+        "\n",
+        "final = calculate_average(test, assignment, exam)\n",
+        "result = determine_result(final)\n",
+        "\n",
+        "print(f\"Final mark: {final}\")\n",
+        "print(f\"Result: {result}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3FJ3t2naWpsb",
+        "outputId": "2899456a-b909-4e4d-d0f1-4c18b25cb2ab"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter test mark:  59\n",
+            "Enter assignment mark:  67\n",
+            "Enter exam mark:  34\n",
+            "Final mark: 48.1\n",
+            "Result: Fail\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calculate_nett_salary(basic, bonus,deduction):\n",
+        "  nett_salery = (basic + bonus) - deduction\n",
+        "  return nett_salery\n",
+        "\n",
+        "def determine_tax_bracket(nett_salery):\n",
+        "  if nett_salery < 5000:\n",
+        "    return \"low bracket\"\n",
+        "\n",
+        "  elif nett_salery <= 15000:\n",
+        "    return \"Middle bracket\"\n",
+        "\n",
+        "  else:\n",
+        "    return \"High bracket\"\n",
+        "\n",
+        "# main program\n",
+        "basic = float(input(\"Enter basic salery:  \"))\n",
+        "bonus = float(input(\"Enter bonus amount:  \"))\n",
+        "deduction = float(input(\"Enter total deduction\"))\n",
+        "\n",
+        "income = calculate_nett_salary(basic, bonus, deduction)\n",
+        "tax = determine_tax_bracket(income)\n",
+        "\n",
+        "print(f\"the the nett salery {income:.2f}\")\n",
+        "print(f\"the tax bracket is {tax}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qqP0s5Jta0WA",
+        "outputId": "0fd6d963-66fa-4429-b0ec-d15139266024"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter basic salery:  674538\n",
+            "Enter bonus amount:  35533\n",
+            "Enter total deduction74663\n",
+            "the the nett salery 635408.00\n",
+            "the tax bracket is High bracket\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "positive_numbers = 0\n",
+        "negative_numbers = 0\n",
+        "total_sum = 0\n",
+        "\n",
+        "for i in range(1,6):\n",
+        "  number = float(input(f\"Enter number {i}: \"))\n",
+        "  total_sum += number\n",
+        "\n",
+        "  if number > 0:\n",
+        "    positive_numbers += 1\n",
+        "    print(\" positive\")\n",
+        "  elif number < 0:\n",
+        "    negative_numbers += 1\n",
+        "    print(\" negative\")\n",
+        "  else:\n",
+        "    print(\" zero\")\n",
+        "\n",
+        "print(f\"positive values: {positive_numbers}\")\n",
+        "print(f\"negative values: {negative_numbers}\")\n",
+        "print(f\"sum of all values: {total_sum}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "FQwrLp3EhsIw",
+        "outputId": "87f9b2dc-0df3-490e-c171-32a5fd253275"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter number 1: 65\n",
+            " positive\n",
+            "Enter number 2: 35\n",
+            " positive\n",
+            "Enter number 3: -54\n",
+            " negative\n",
+            "Enter number 4: 0\n",
+            " zero\n",
+            "Enter number 5: 4\n",
+            " positive\n",
+            "positive values: 3\n",
+            "negative values: 1\n",
+            "sum of all values: 50.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calculate_gross_salery(hours_worked, hourly_rate):\n",
+        "  if hours_worked > 40:\n",
+        "    # This part was logically incorrect. If hours_worked > 40, it implies overtime.\n",
+        "    # The original else block had the correct overtime calculation logic.\n",
+        "    # To fix, the gross calculation for overtime should be here.\n",
+        "    normal_pay = 40 * hourly_rate\n",
+        "    overtime_hours = hours_worked - 40\n",
+        "    overtime_pay = (hourly_rate * 1.5) * overtime_hours\n",
+        "    gross = normal_pay + overtime_pay\n",
+        "  else:\n",
+        "    # If hours_worked is 40 or less, it's just normal pay.\n",
+        "    gross = hours_worked * hourly_rate\n",
+        "  return gross\n",
+        "\n",
+        "def calculate_net_salery(gross_salery):\n",
+        "  # Original error: gross_salery was called like a function, and the decimal syntax was incorrect.\n",
+        "  # Corrected to multiply by (1 - tax_rate).\n",
+        "  net = gross_salery * (1 - 0.15) # Assuming 15% tax/deduction rate\n",
+        "  return net # Should return net, not gross_salery\n",
+        "\n",
+        "# main program\n",
+        "\n",
+        "hours_worked = float(input(\"Enter hours worked: \"))\n",
+        "hourly_rate = float(input(\"Enter hourly rate: \"))\n",
+        "\n",
+        "gross = calculate_gross_salery(hours_worked, hourly_rate)\n",
+        "net = calculate_net_salery(gross)\n",
+        "print(f\"Gross salery: {gross:.2f}\")\n",
+        "print(f\"Net salery: {net:.2f}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "TmBpMYtomk0I",
+        "outputId": "4753b4ae-ee16-4c9c-95b6-1c321da5c75a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter hours worked: 65\n",
+            "Enter hourly rate: 4\n",
+            "Gross salery: 310.00\n",
+            "Net salery: 263.50\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "even_sum = 0\n",
+        "odd_sum = 0\n",
+        "total_sum = 0\n",
+        "\n",
+        "for i in range(1,11):\n",
+        "  number = float(input(f\"Enter number {i}: \"))\n",
+        "  total_sum += number\n",
+        "\n",
+        "  if number % 2 == 0:\n",
+        "    even_sum += 1\n",
+        "    print(\" even\")\n",
+        "  else:\n",
+        "    odd_sum += 1\n",
+        "    print(\" odd\")\n",
+        "\n",
+        "print(f\"even numbers: {even_sum}\")\n",
+        "print(f\"odd numbers: {odd_sum}\")\n",
+        "print(f\"sum of all values: {total_sum}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-fYNcjFgy392",
+        "outputId": "2db7324f-99fa-41b4-a638-d5f3363ef78a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter number 1: 45\n",
+            " odd\n",
+            "Enter number 2: 44\n",
+            " even\n",
+            "Enter number 3: 4\n",
+            " even\n",
+            "Enter number 4: 48\n",
+            " even\n",
+            "Enter number 5: 87\n",
+            " odd\n",
+            "Enter number 6: 77\n",
+            " odd\n",
+            "Enter number 7: 56\n",
+            " even\n",
+            "Enter number 8: 89\n",
+            " odd\n",
+            "Enter number 9: 66\n",
+            " even\n",
+            "Enter number 10: 44\n",
+            " even\n",
+            "even numbers: 6\n",
+            "odd numbers: 4\n",
+            "sum of all values: 560.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "RtV3FI8d2wfz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "def main():\n",
+        "    attempts = 7\n",
+        "    secret_number = generate_number()\n",
+        "    while attempts > 0:\n",
+        "        guess = int(input(\"Guess the number (1-50):\"))\n",
+        "        guesses = evaluate_guess(secret_number, guess)\n",
+        "        if guesses == \"Correct\":\n",
+        "            print(\"guess is correct!\")\n",
+        "            break\n",
+        "        elif guesses == \"Too High\":\n",
+        "            attempts -= 1          # ✅ no underscore\n",
+        "            print(f\"Too High, {attempts} attempts remaining\")\n",
+        "        else:\n",
+        "            attempts -= 1          # ✅ no underscore\n",
+        "            print(f\"Too Low, {attempts} attempts remaining\")\n",
+        "\n",
+        "        if attempts == 0:          # ✅ inside loop but after decrement\n",
+        "            print(\"Out of attempts, gameover!\")"
+      ],
+      "metadata": {
+        "id": "RFIx-j5aaisZ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def app(environ, start_response):\n",
+        "  with open(r\"c:main\\python\\app.log\",\"a\") as file:\n",
+        "       file.write(str(environ))\n",
+        "       # Add more writing operations here if needed, or remove the line below if it's a typo\n",
+        "       # wwrin\n",
+        "\n",
+        "# Provide a placeholder function for start_response to avoid TypeError\n",
+        "def mock_start_response(status, headers, exc_info=None):\n",
+        "    print(f\"Status: {status}\")\n",
+        "    print(f\"Headers: {headers}\")\n",
+        "\n",
+        "App = app(input('Enter environment info: '), mock_start_response)\n",
+        "print(f\"message: {App}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IWuNy_JZBDIa",
+        "outputId": "f5c192b5-9d86-4a2c-ee51-5798392f0569"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter environment info:  Bad bad air\n",
+            "message: None\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
