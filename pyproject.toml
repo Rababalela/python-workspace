@@ -1,0 +1,8 @@
+[project]
+name = "python-workspace"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "pyttsx3>=2.99",
+    "speechrecognition>=3.16.0",
+]
