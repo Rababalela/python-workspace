@@ -1,3 +1,5 @@
+# this was a pain to make 😭
+
 import datetime
 import webbrowser
 import math
