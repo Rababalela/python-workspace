@@ -109,18 +109,15 @@ def computer_move(board):
         return True
 
     # take any remaining space
+    available_moves = [i for i in range(9) if board[i] not in ['X', 'O']]
     if available_moves:
         move = random.choice(available_moves)
         board[move] = 'O'
         print("Computer chose position", {move + 1})
         return True
+    return None
 
-    # take any remaining space if available_moves:
-        move = random.choice(available_moves)
-        board[move] = 'O'
-        print("Computer chose position",{move + 1})
-        return True
-    
+
 # score tracking
 
 def display_score(scores):
@@ -133,7 +130,7 @@ def display_score(scores):
 
 def play_game():
     """
-    run a single game of tic tac toe 
+    run a single game of tic-tac-toe
     """
     board = create_board()
     player_score = 0
@@ -181,7 +178,6 @@ def play_game():
             print("It's a draw!")
             draws += 1
             break
-    display_score({"Player": player_score, "Computer": computer_score, "Draws": draws})
     
 # Entry point
 def main():
@@ -189,11 +185,11 @@ def main():
      print("WELCOME TO TIC TAC TOE!")
      print("-" * 35 + "\n")
      
-     display_score({"Player": 0, "Computer": 0, "Draws": 0})
+     scores = ({"Player": 0, "Computer": 0, "Draws": 0})
      
      while True:
-         play_game(display_score)
-         display_score(display_score)
+         play_game()
+         display_score(scores)
          
          again = input("Do you want to play again? (y/n): ").lower().strip()
          if again != 'y':

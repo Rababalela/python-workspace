@@ -1,4 +1,4 @@
-# prject 1 
+# project 1 
 
 import math 
 
