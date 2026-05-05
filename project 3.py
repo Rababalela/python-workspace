@@ -58,7 +58,11 @@ def player_move(board):
     """
     while True:
         try:
-            move = int(input("Enter your move (1-9): ")) - 1
+            move = input("Enter your move (1-9): ")
+            if not move.isdigit():
+                print("Invalid input. Please enter a number between 1 and 9.")
+                continue
+            move = int(move) - 1
             if move < 0 or move > 8:
                 print("Invalid move. Please enter a number between 1 and 9.")
             elif board[move] in ['X', 'O']:
@@ -75,47 +79,47 @@ def computer_move(board):
     """ 
     Computer makes a random move on the board.
     """
-    # win if possible
     available_moves = [i for i in range(9) if board[i] not in ['X', 'O']]
-    if available_moves:
-        move = random.choice(available_moves)
-        board[move] = 'O'
-        if check_win(board, 'O'):
-            print("Computer chose position", {move + 1})
-            return True
-        board[move] = str(move + 1)  # Reset the move for win checking
     
-    # block opponent's win
+    # 1. Try to win
     for move in available_moves:
         board[move] = 'O'
         if check_win(board, 'O'):
-            print("Computer chose position", {move + 1})
+            print(f"Computer chose position {move + 1}")
             return True
-        board[move] = str(move + 1)  # Reset the move for win checking
+        board[move] = str(move + 1)
 
-    # take center if available
+    # 2. Try to block player
+    for move in available_moves:
+        board[move] = 'X'
+        if check_win(board, 'X'):
+            board[move] = 'O'
+            print(f"Computer chose position {move + 1}")
+            return True
+        board[move] = str(move + 1)
+
+    # 3. Take center
     if board[4] not in ['X', 'O']:
         board[4] = 'O'
         print("Computer chose position 5")
         return True
     
-    # take a corner if available
+    # 4. Take corner
     corners = [0, 2, 6, 8]
     available_corners = [i for i in corners if board[i] not in ['X', 'O']]
     if available_corners:
         move = random.choice(available_corners)
         board[move] = 'O'
-        print("Computer chose position", {move + 1})
+        print(f"Computer chose position {move + 1}")
         return True
 
-    # take any remaining space
-    available_moves = [i for i in range(9) if board[i] not in ['X', 'O']]
+    # 5. Take any remaining
     if available_moves:
         move = random.choice(available_moves)
         board[move] = 'O'
-        print("Computer chose position", {move + 1})
+        print(f"Computer chose position {move + 1}")
         return True
-    return None
+    return False
 
 
 # score tracking
@@ -128,25 +132,18 @@ def display_score(scores):
     
 # main game loop
 
-def play_game():
+def play_game(scores):
     """
-    run a single game of tic-tac-toe
+    run a single game of tic-tac-toe and update scores
     """
     board = create_board()
-    player_score = 0
-    computer_score = 0
-    draws = 0
     
-    print("/------------------------------/")
+    print("\n/------------------------------/")
     print("  NEW GAME STARTED! GOOD LUCK! ")
     print("/------------------------------/") 
-    print("you are 'X' and the computer is 'O'.")
-    display_score({"Player": player_score, "Computer": computer_score, "Draws": draws})
+    print("You are 'X' and the computer is 'O'.")
     
-       
     while True:
-        # player's turn
-        
         display_board(board)
         print("Your turn!")
         player_move(board)
@@ -154,44 +151,46 @@ def play_game():
         if check_win(board, 'X'):
             display_board(board)
             print("Congratulations! You win!")
-            player_score += 1
+            scores['Player'] += 1
             break
         
         if check_draw(board):
             display_board(board)
             print("It's a draw!")
-            draws += 1
+            scores['Draws'] += 1
             break
         
-        # computer's turn
-        print("Computer's turn!")
+        print("Computer's turn...")
         computer_move(board)
         
         if check_win(board, 'O'):
             display_board(board)
             print("Computer wins! Better luck next time.")
-            computer_score += 1
+            scores['Computer'] += 1
             break
         
         if check_draw(board):
             display_board(board)
             print("It's a draw!")
-            draws += 1
+            scores['Draws'] += 1
             break
     
 # Entry point
 def main():
      print("\n" + "-" * 35)
      print("WELCOME TO TIC TAC TOE!")
-     print("-" * 35 + "\n")
+     print("-" * 35)
      
-     scores = ({"Player": 0, "Computer": 0, "Draws": 0})
+     scores = {"Player": 0, "Computer": 0, "Draws": 0}
      
      while True:
-         play_game()
+         play_game(scores)
          display_score(scores)
          
-         again = input("Do you want to play again? (y/n): ").lower().strip()
+         again = input("\nDo you want to play again? (y/n): ").lower().strip()
          if again != 'y':
            print("Thanks for playing! Goodbye!")
            break
+
+if __name__ == "__main__":
+    main()
