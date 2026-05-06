@@ -1,0 +1,16 @@
+[
+  {
+    "date": "06-05-2026",
+    "amount": 22.0,
+    "category": "food",
+    "id": 1,
+    "description": "Bread"
+  },
+  {
+    "date": "06-05-2026",
+    "amount": 999.0,
+    "category": "other",
+    "id": 2,
+    "description": "air fryer"
+  }
+]
